@@ -34,6 +34,17 @@ ParsedLine* parse(std::string line)
 		type="ul";
 		line=line.substr(1,line.length());
 	}
+	if ( std::isdigit( line.at(0) ) && line.at(1)=='.' )
+	{
+		type="ol";
+		line=line.substr(2,line.length());
+	}
+	if (line.at(0)=='>')
+	{
+		type="blockquote";
+		line=line.substr(1,line.length());
+	}
+	line=inlineMarkup(line);
 	ParsedLine* parsed=new ParsedLine(line,type);
 	return parsed;
 }

@@ -40,6 +40,50 @@ std::string markup(FileData* fd)
 				markedUp+="</ul>\n";
 			}
 		}
+		else if (type.compare("ol")==0)
+		{
+			if (i>0)
+			{
+				if (lines.at(i-1)->getType().compare("ol")!=0)
+				{
+					markedUp+="<ol>\n";
+				}
+			}
+			markedUp+="<li>" + line + "</li>\n";
+			if (i<lines.size()-1)
+			{
+				if(lines.at(i+1)->getType().compare("ol")!=0)
+				{
+					markedUp+="</ol>\n";
+				}
+			}
+			else 
+			{
+				markedUp+="</ul>\n";
+			}
+		}
+		else if (type.compare("blockquote")==0)
+		{
+			if (i>0)
+			{
+				if (lines.at(i-1)->getType().compare("blockquote")!=0)
+				{
+					markedUp+="<blockquote>\n";
+				}
+			}
+			markedUp+=line+"\n";
+			if (i<lines.size()-1)
+			{
+				if(lines.at(i+1)->getType().compare("blockquote")!=0)
+				{
+					markedUp+="</blockquote>\n";
+				}
+			}
+			else 
+			{
+				markedUp+="</blockquote>\n";
+			}
+		}
 		else
 		{
 			markedUp+=line + "\n";
