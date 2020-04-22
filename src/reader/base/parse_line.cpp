@@ -1,7 +1,7 @@
 #include "parse_line.h"
 #include <iostream>
 
-ParsedLine* parse(std::string line)
+ParsedLine parse(std::string line)
 {
 	std::string type="";
 	if (line.at(0)=='#')
@@ -45,6 +45,6 @@ ParsedLine* parse(std::string line)
 		line=line.substr(1,line.length());
 	}
 	line=inlineMarkup(line);
-	ParsedLine* parsed=new ParsedLine(line,type);
+	ParsedLine parsed (line,type);
 	return parsed;
 }

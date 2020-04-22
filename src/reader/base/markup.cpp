@@ -1,13 +1,13 @@
 #include "markup.h"
 
-std::string markup(FileData* fd)
+std::string markup(FileData fd)
 {
 	std::string markedUp="";
-	std::vector<ParsedLine*> lines=fd->getParsedLines();
+	std::vector<ParsedLine> lines=fd.getParsedLines();
 	for(int i =0; i<lines.size();i++)
 	{
-		std::string line=lines.at(i)->getLine();
-		std::string type=lines.at(i)->getType();
+		std::string line=lines.at(i).getLine();
+		std::string type=lines.at(i).getType();
 		if (type.compare("h1")==0)
 		{
 			markedUp+="<h1>" + line + "</h1>\n";
@@ -23,14 +23,14 @@ std::string markup(FileData* fd)
 		else if (type.compare("ul")==0)
 		{
 			if (i>0){
-				if (lines.at(i-1)->getType().compare("ul")!=0)
+				if (lines.at(i-1).getType().compare("ul")!=0)
 				{
 					markedUp+="<ul>\n";
 				}
 			}
 			markedUp+="<li>" + line + "</li>\n";
 			if (i<lines.size()-1){
-				if (lines.at(i+1)->getType().compare("ul")!=0)
+				if (lines.at(i+1).getType().compare("ul")!=0)
 				{
 					markedUp+="</ul>\n";
 				}
@@ -44,7 +44,7 @@ std::string markup(FileData* fd)
 		{
 			if (i>0)
 			{
-				if (lines.at(i-1)->getType().compare("ol")!=0)
+				if (lines.at(i-1).getType().compare("ol")!=0)
 				{
 					markedUp+="<ol>\n";
 				}
@@ -52,7 +52,7 @@ std::string markup(FileData* fd)
 			markedUp+="<li>" + line + "</li>\n";
 			if (i<lines.size()-1)
 			{
-				if(lines.at(i+1)->getType().compare("ol")!=0)
+				if(lines.at(i+1).getType().compare("ol")!=0)
 				{
 					markedUp+="</ol>\n";
 				}
@@ -66,7 +66,7 @@ std::string markup(FileData* fd)
 		{
 			if (i>0)
 			{
-				if (lines.at(i-1)->getType().compare("blockquote")!=0)
+				if (lines.at(i-1).getType().compare("blockquote")!=0)
 				{
 					markedUp+="<blockquote>\n";
 				}
@@ -74,7 +74,7 @@ std::string markup(FileData* fd)
 			markedUp+=line+"\n";
 			if (i<lines.size()-1)
 			{
-				if(lines.at(i+1)->getType().compare("blockquote")!=0)
+				if(lines.at(i+1).getType().compare("blockquote")!=0)
 				{
 					markedUp+="</blockquote>\n";
 				}

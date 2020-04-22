@@ -5,4 +5,4 @@
 #include "parsed_line.h"
 #include "inline_markup.h"
 
-ParsedLine* parse(std::string line);
+ParsedLine parse(std::string line);

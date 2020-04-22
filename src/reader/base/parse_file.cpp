@@ -1,5 +1,6 @@
 #include "parse_file.h"
 #include <fstream>
+#include <iostream>
 
 std::vector<std::string> parseFile(std::string location)
 {
